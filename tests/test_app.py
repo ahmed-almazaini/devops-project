@@ -19,13 +19,19 @@ class TestApp(unittest.TestCase):
         response = self.client.get("/")
         self.assertEqual(response.status_code, 200)
         self.assertIn(b"DevOps Support Service", response.data)
-        self.assertIn(b"1.0.0", response.data)
+        self.assertIn(b"1.1.0", response.data)
 
     def test_health(self):
         response = self.client.get("/health")
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json["status"], "healthy")
-        self.assertEqual(response.json["version"], "1.0.0")
+        self.assertEqual(response.json["version"], "1.1.0")
+
+    def test_contact(self):
+        response = self.client.get("/contact")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json["version"], "1.1.0")
+        self.assertIn("support_email", response.json)
 
     def test_not_found(self):
         response = self.client.get("/missing")

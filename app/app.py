@@ -2,7 +2,7 @@ from flask import Flask, jsonify
 
 app = Flask(__name__)
 
-VERSION = "1.0.0"
+VERSION = "1.1.0"
 
 @app.route("/")
 def home():
@@ -77,6 +77,15 @@ def home():
 def health():
     return jsonify(
         status="healthy",
+        version=VERSION
+    ), 200
+
+@app.route("/contact")
+def contact():
+    return jsonify(
+        service="DevOps Support Service",
+        support_email="support@example.com",
+        service_hours="8:00 AM - 4:00 PM",
         version=VERSION
     ), 200
 
