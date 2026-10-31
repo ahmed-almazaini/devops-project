@@ -25,7 +25,7 @@ class TestApp(unittest.TestCase):
         response = self.client.get("/health")
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json["status"], "healthy")
-        self.assertEqual(response.json["version"], "9.9.9")
+        self.assertEqual(response.json["version"], "1.0.0")
 
     def test_not_found(self):
         response = self.client.get("/missing")
