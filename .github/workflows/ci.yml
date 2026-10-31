@@ -31,3 +31,15 @@ jobs:
 
       - name: Run Ruff
         run: ruff check app/app.py tests/
+
+      - name: Build Docker image
+        run: docker build -t devops-service:${{ github.sha }} app/
+
+      - name: Save Docker image
+        run: docker save devops-service:${{ github.sha }} -o devops-service.tar
+
+      - name: Upload Docker artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: devops-service-${{ github.sha }}
+          path: devops-service.tar
