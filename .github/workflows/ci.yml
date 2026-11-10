@@ -32,6 +32,9 @@ jobs:
       - name: Run Ruff
         run: ruff check app/app.py tests/
 
+      - name: Verify non-root Docker user
+        run: grep -q '^USER appuser$' app/Dockerfile
+
       - name: Build Docker image
         run: docker build -t devops-service:${{ github.sha }} app/
 
